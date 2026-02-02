@@ -1,5 +1,13 @@
 # VS Code local settings
 .vscode/
-.env/
-.node_modules/
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment files
+.env
+.env.*
+**/.env
+**/.env.*
 
