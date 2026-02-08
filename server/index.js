@@ -14,6 +14,7 @@ import searchRoute from "./routes/search.route.js"
 import shopReviewRouter from "./routes/review.route.js"
 import featureRouter from "./routes/feature.route.js"
 
+
 const app = express();
 
 app.use(cors({
@@ -33,6 +34,10 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
+
+// const _dirname = path.dirname("");
+// const buildpath = path.join(_dirname, "../client/dist");
+// app.use(express.static(buildpath));
 
 const PORT = process.env.PORT || 8000;
 
