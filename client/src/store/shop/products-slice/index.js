@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from "@/lib/apiClient";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
@@ -16,7 +16,7 @@ export const fetchAllFilteredProducts = createAsyncThunk(
             ...filterParams,
             sortBy: sortParams,
         });
-        const response = await axios(`/api/shop/get-products?${query.toString()}`, {
+        const response = await apiClient(`/api/shop/get-products?${query.toString()}`, {
             withCredentials: true,
         });
         return response.data;
@@ -27,7 +27,7 @@ export const fetchProductsDetails = createAsyncThunk(
     'shopProducts/fetchProductsDetails',
     async (id) => {
         // console.log(fetchAllFilteredProducts, "Thunk called");
-        const response = await axios(`/api/shop/get-products/${id}`, {
+        const response = await apiClient(`/api/shop/get-products/${id}`, {
             withCredentials: true,
         });
         console.log(response);

@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from "@/lib/apiClient";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
@@ -14,7 +14,7 @@ export const addNewProduct = createAsyncThunk(
   "products/addNewProduct",
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
+      const response = await apiClient.post(
         "/api/product/add",
         formData,
         {
@@ -34,7 +34,7 @@ export const fetchAllProduct = createAsyncThunk(
   "products/fetchAllProduct",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
+      const response = await apiClient.get(
         "/api/product/getAll",
         { withCredentials: true }
       );
@@ -50,7 +50,7 @@ export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async ({ id, formData }, { rejectWithValue }) => {
     try {
-      const response = await axios.put(
+      const response = await apiClient.put(
         `/api/product/update/${id}`,
         formData,
         { withCredentials: true }
@@ -67,7 +67,7 @@ export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(
+      const response = await apiClient.delete(
         `/api/product/delete/${id}`,
         { withCredentials: true }
       );

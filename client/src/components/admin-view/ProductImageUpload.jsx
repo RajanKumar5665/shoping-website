@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { Input } from "../ui/input";
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
-import axios from "axios";
+import apiClient from "@/lib/apiClient";
 import { Skeleton } from "../ui/skeleton";
 
 const ProductImageUpload = ({
@@ -51,7 +51,7 @@ const ProductImageUpload = ({
     setImageLoadingState(true);
     const data = new FormData();
     data.append("my_file", imageFile);
-    const response = await axios.post(
+    const response = await apiClient.post(
       "/api/product/upload-image",
       data
     );

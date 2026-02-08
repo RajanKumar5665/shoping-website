@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import apiClient from "@/lib/apiClient";
 
 
 const initialState = {
@@ -11,7 +11,7 @@ export const addFeatureImage = createAsyncThunk(
     "/order/addFeatureImage",
     async(image, {rejectWithValue }) =>{
          try {
-     const response = await axios.post(`/api/features/add`, { image });
+   const response = await apiClient.post(`/api/features/add`, { image });
              return response.data;
          } catch (error) {
             return rejectWithValue(error?.response?.data);
@@ -23,7 +23,7 @@ export const getFeatureImages = createAsyncThunk(
     "/features/getFeatureImages",
     async (_, {rejectWithValue}) => {
            try {
-                const response = await axios.get(`/api/features/`);
+                const response = await apiClient.get(`/api/features/`);
                 return response.data;
            } catch (error) {
              return rejectWithValue(error?.response?.data);

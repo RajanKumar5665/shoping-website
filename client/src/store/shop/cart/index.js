@@ -1,4 +1,4 @@
-import axios from "axios"
+import apiClient from "@/lib/apiClient"
 import { createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 
 
@@ -13,7 +13,7 @@ export const addToCart = createAsyncThunk(
     'cart/addCartItem',
     async({ userId, productId, quantity })=>{
         //  console.log({ userId, productId, quantity });
-         const response = await axios.post('/api/cart/add', {
+         const response = await apiClient.post('/api/cart/add', {
             userId,
             productId,
             quantity
@@ -26,7 +26,7 @@ export const fetchCartItem = createAsyncThunk(
     'cart/getCartItems',
     async(userId)=>{
          // API call to add item to cart
-         const response = await axios.get(`/api/cart/get/${userId}`, {
+         const response = await apiClient.get(`/api/cart/get/${userId}`, {
          });
          return response.data;
     }
@@ -35,7 +35,7 @@ export const fetchCartItem = createAsyncThunk(
 export const updateCartQuantity = createAsyncThunk(
   'cart/updateCartQuantity',
   async ({ userId, productId, quantity }) => {
-    const response = await axios.put(
+        const response = await apiClient.put(
             '/api/cart/update-cart',
       { userId, productId, quantity }
     );
@@ -47,7 +47,7 @@ export const updateCartQuantity = createAsyncThunk(
 export const deleteCartItem = createAsyncThunk(
     'cart/deleteCartItem',
     async({ userId, productId })=>{
-         const response = await axios.delete(`/api/cart/${userId}/${productId}`);
+         const response = await apiClient.delete(`/api/cart/${userId}/${productId}`);
          return response.data;
     }
 )
