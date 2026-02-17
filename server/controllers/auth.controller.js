@@ -68,8 +68,8 @@ export const loginUser = async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
-        secure: isProd,
-        sameSite: isProd ? "none" : "strict",
+        secure: isProd, // true in prod (HTTPS), false in dev
+        sameSite: isProd ? "none" : "lax", // none in prod, lax in dev
         maxAge: 60 * 60 * 1000, // 1 hour
       })
       .status(200)
@@ -98,13 +98,13 @@ export const logoutUser = (req, res) => {
        .clearCookie("token", {
          httpOnly: true,
          secure: isProd,
-         sameSite: isProd ? "none" : "strict",
-         })
-         .status(200)
-         .json({
-           success: true,
-           message: "Logged out successfully",
-         });
+         sameSite: isProd ? "none" : "lax",
+       })
+       .status(200)
+       .json({
+         success: true,
+         message: "Logged out successfully",
+       });
 }
 
 //auth middleware
