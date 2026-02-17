@@ -13,20 +13,23 @@ const CommonForm = ({ formControls, formData, setFormData, onSubmit, buttonText,
         const value = formData[getControlItem.name] || '';
         switch(getControlItem.componentType){
             case 'input':
-                element = (<Input
-                type={getControlItem.type}
-                name={getControlItem.name}
-                placeholder={getControlItem.placeholder}
-                id={getControlItem.name}
-                value={value}
-                onChange={(event) =>
-                    setFormData({
-                      ...formData,
-                       [getControlItem.name] : event.target.value
-                    })
-                }
-                />
-        );  
+                element = (
+                  <Input
+                    type={getControlItem.type}
+                    name={getControlItem.name}
+                    placeholder={getControlItem.placeholder}
+                    id={getControlItem.name}
+                    value={value}
+                    onChange={(event) =>
+                      setFormData({
+                        ...formData,
+                        [getControlItem.name]: event.target.value
+                      })
+                    }
+                    // Add autocomplete for password field
+                    autocomplete={getControlItem.type === 'password' ? 'current-password' : undefined}
+                  />
+                );
                 break;
                  case 'select':
                 element = (

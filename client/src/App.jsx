@@ -29,16 +29,19 @@ import SearchProducts from './pages/shopping-view/SearchProducts.jsx'
 
 
 const App = () => {
-      const {user, isAuthenticated, isLoading} = useSelector((state) => state.auth);
-      const dispatch = useDispatch();
+  const { user, isAuthenticated, isLoading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-      useEffect(() => {
-        dispatch(checkAuth());
-      }, [dispatch]);
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
 
-      if(isLoading){
-        return <Skeleton className="h-[600px] w-[800px] bg-black" />;
-      }
+  // Show loading only for protected pages, not for login/register
+  const pathname = window.location.pathname;
+  const isAuthPage = pathname.includes('/auth/login') || pathname.includes('/auth/register');
+  if (isLoading && !isAuthPage) {
+    return <Skeleton className="h-[600px] w-[800px] bg-black" />;
+  }
 
   return (
     <div className='flex flex-col overflow-hidden bg-white'>
