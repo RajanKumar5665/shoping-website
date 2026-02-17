@@ -32,13 +32,21 @@ const App = () => {
   const { user, isAuthenticated, isLoading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(checkAuth());
-  }, [dispatch]);
-
-  // Show loading only for protected pages, not for login/register
+  // Show login page immediately if not authenticated and not on login/register
   const pathname = window.location.pathname;
   const isAuthPage = pathname.includes('/auth/login') || pathname.includes('/auth/register');
+  if (!isAuthenticated && !isAuthPage) {
+    window.location.href = '/auth/login';
+    return null;
+  }
+
+  // Only check auth if not on login/register and not already authenticated
+  useEffect(() => {
+    if (!isAuthPage && !isAuthenticated) {
+      dispatch(checkAuth());
+    }
+  }, [dispatch, isAuthPage, isAuthenticated]);
+
   if (isLoading && !isAuthPage) {
     return <Skeleton className="h-[600px] w-[800px] bg-black" />;
   }

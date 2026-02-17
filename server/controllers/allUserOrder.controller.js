@@ -15,8 +15,8 @@ export const getAllOrdersOfAllUsers = async (req, res) => {
       success: true,
       data: orders,
     });
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
     res.status(500).json({
       success: false,
       message: "Some error occured!",
